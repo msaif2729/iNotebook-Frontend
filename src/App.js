@@ -1,12 +1,16 @@
 import './App.css';
+import Main from './components/Main';
+import NoteState from './context/notes/NoteState';
+
 
 function App() {
+
   return (
-    <>
-      <h1 className=' text-3xl text-red-500 font-sans font-semibold'>
-        Mohammed Saif
-      </h1>
-    </>
+    <div className='h-full'>
+      <NoteState>
+        <Main/>
+      </NoteState>
+    </div>
   );
 }
 
