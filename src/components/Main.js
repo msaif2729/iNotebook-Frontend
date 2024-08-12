@@ -8,6 +8,7 @@ import {
   } from "react-router-dom";
 import About from './About';
 import AddNote from './AddNote';
+import Alert from './Alert';
 
 export default function Main() {
 
@@ -15,6 +16,7 @@ export default function Main() {
     <div className='h-full'>
         <Router>
             <Navbar/>
+            <Alert/>
             <Routes>
             <Route path="/" element={<Note />} />
             <Route path="/about" element={<About />} />

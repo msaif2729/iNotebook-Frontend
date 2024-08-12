@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef } from "react";
+import React, { useContext,  useRef } from "react";
 import noteContext from "../context/notes/noteContext";
 import {
     useLocation,
@@ -14,12 +14,6 @@ export default function Navbar() {
   const option = useRef(null);
 
   const location = useLocation()
-
-  useEffect(()=>{
-    console.log(location.pathname)
-  },[location])
-
-  // console.log(s1)
 
   const handleclick = () => {
     if (s1.click) {
@@ -39,7 +33,7 @@ export default function Navbar() {
 
   return (
     <div>
-      <nav className=" bg-gray-100 px-3 py-4 flex justify-between transition-all duration-100 ">
+      <nav className=" bg-gray-100 px-3 py-4 w-full flex justify-between transition-all duration-100 z-10 fixed  ">
         <Link to="/" className=" tracking-wide text-xl cursor-pointer">
           <b>i</b>
           <span className=" font-extrabold text-blue-700">NoteBook</span>
@@ -93,7 +87,7 @@ export default function Navbar() {
           </li>
         </ul>
       </nav>
-      <div className="bg-gray-200 px-5 py-2 hidden" ref={option}>
+      <div className="bg-gray-200 px-5 py-2 fixed w-full mt-[60px] hidden md:hidden transition-all duration-100" ref={option}>
         <ul className="space-y-2 ">
         <li className=" tracking-wide cursor-pointer self-center">
           <Link to="/"  className={location.pathname === "/"? "text-blue-700 font-semibold": "text-gray-800"}>Home</Link >
