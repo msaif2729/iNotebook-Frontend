@@ -9,6 +9,7 @@ import {
 import About from './About';
 import AddNote from './AddNote';
 import Alert from './Alert';
+import Logregis from './Logregis';
 
 export default function Main() {
 
@@ -21,6 +22,7 @@ export default function Main() {
             <Route path="/" element={<Note />} />
             <Route path="/about" element={<About />} />
             <Route path="/addnote" element={<AddNote />} />
+            <Route path="/login" element={<Logregis />} />
             </Routes>
         </Router>
     </div>

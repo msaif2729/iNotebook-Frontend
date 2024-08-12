@@ -14,6 +14,7 @@ export default function Navbar() {
   const option = useRef(null);
 
   const location = useLocation()
+  console.log(location)
 
   const handleclick = () => {
     if (s1.click) {
@@ -33,7 +34,7 @@ export default function Navbar() {
 
   return (
     <div>
-      <nav className=" bg-gray-100 px-3 py-4 w-full flex justify-between transition-all duration-100 z-10 fixed  ">
+      <nav className={` bg-gray-100 px-3 py-4 w-full flex justify-between transition-all duration-100 z-10 fixed ${location.pathname==="/login"?"hidden":"block"} `}>
         <Link to="/" className=" tracking-wide text-xl cursor-pointer">
           <b>i</b>
           <span className=" font-extrabold text-blue-700">NoteBook</span>
@@ -50,6 +51,9 @@ export default function Navbar() {
                 </li>
                 <li className=" tracking-wide cursor-pointer self-center ">
                   <Link to="/addnote" className={location.pathname === "/addnote"? "text-blue-700 font-semibold": "text-gray-800"}>Add Note</Link >
+                </li>
+                <li className=" tracking-wide cursor-pointer self-center ">
+                  <Link to="/login" className={location.pathname === "/login"? "text-blue-700 font-bold border  py-1 px-3 rounded-lg border-blue-700  ": "text-blue-800 font-bold border-2 py-1 px-3 rounded-lg border-blue-700"}>Login</Link >
                 </li>
                 {/* <li className="flex cursor-pointer self-center">
                   <div className="flex justify-center items-center space-x-1">
@@ -97,6 +101,9 @@ export default function Navbar() {
         </li>
         <li className=" tracking-wide cursor-pointer self-center ">
             <Link to="/addnote" className={location.pathname === "/addnote"? "text-blue-700 font-semibold": "text-gray-800"}>Add Note</Link >
+        </li>
+        <li className=" tracking-wide cursor-pointer self-center py-2">
+            <Link to="/login" className="text-blue-800 font-bold border-2 py-1 px-3 rounded-lg border-blue-700">Login</Link >
         </li>
         </ul>
         
