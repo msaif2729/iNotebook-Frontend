@@ -1,10 +1,16 @@
-import React, { useEffect, useRef } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import noteContext from "../context/notes/noteContext";
+
 
 export default function Logregis() {
 
+    const context = useContext(noteContext)
+
     const passin = useRef(null)
+    const passinr = useRef(null)
     const passi = useRef(null)
+    const passir = useRef(null)
 
     const login = useRef(null)
     const regis = useRef(null)
@@ -20,16 +26,22 @@ export default function Logregis() {
 
     const passtogle = ()=>{
 
-        if(passin.current.type=="password" && passi.current.classList.contains("fa-eye-slash"))
+        if((passin.current.type==="password" && passi.current.classList.contains("fa-eye-slash")) || (passinr.current.type==="password" && passir.current.classList.contains("fa-eye-slash")) )
         {
            passin.current.type="text"
            passi.current.classList.remove("fa-eye-slash")
            passi.current.classList.add("fa-eye")
+           passinr.current.type="text"
+           passir.current.classList.remove("fa-eye-slash")
+           passir.current.classList.add("fa-eye")
         }
         else{
             passin.current.type="password"
             passi.current.classList.remove("fa-eye")
             passi.current.classList.add("fa-eye-slash")
+            passinr.current.type="password"
+            passir.current.classList.remove("fa-eye")
+            passir.current.classList.add("fa-eye-slash")
            
         }
 
@@ -60,9 +72,36 @@ export default function Logregis() {
 
         console.log("clicked")
         navigate("/")
-       
- 
-         
+        
+     }
+
+     const [logindata,setLData] = useState({lemail:"",lpass:""})
+    
+     const loginuser = (e)=>{
+
+      e.preventDefault()
+      // console.log(logindata)
+      context.userlogin(logindata.lemail,logindata.lpass)
+    
+
+     }
+
+     const [regisdata,setRData] = useState({rname:"",remail:"",rpass:""})
+     
+     const regisuser = (e)=>{
+
+      e.preventDefault()
+      console.log(regisdata)
+      context.userregis(regisdata.rname,regisdata.remail,regisdata.rpass)
+
+     }
+
+     const onchangeLogin = (e)=>{
+        setLData({...logindata,[e.target.name]:e.target.value})
+     }
+
+     const onchangeRegis = (e)=>{
+      setRData({...regisdata,[e.target.name]:e.target.value})
      }
 
     
@@ -72,7 +111,7 @@ export default function Logregis() {
         <div className="bg-blue-400 absolute w-full flex h-full ">
         <div className="bg-blue-500 relative  w-[100%] rotate-0  h-[100%]">
             <h1 className="text-white p-3 cursor-pointer" onClick={gotoHome}>
-                <i class="fa-sharp fa-solid fa-arrow-left px-2"></i>
+                <i className="fa-sharp fa-solid fa-arrow-left px-2"></i>
                 Home
             </h1>
         </div>
@@ -99,7 +138,11 @@ export default function Logregis() {
                 type="text"
                 placeholder="Enter Title..."
                 className="w-[90%] bg-white border-2 border-gray-300 rounded-l-lg text-base border-r-0 px-4 py-2 shadow-sm focus:outline-none focus:border-blue-700 focus:border-r-0 focus:border-2 focus:ring-blue-100"
-                name="email"
+                name="lemail"
+                value={logindata.lemail}
+                onChange={onchangeLogin}
+                required
+                autoComplete="current-email" 
               />
               <i className="fa-solid fa-user self-center text-blue-700 bg-white p-3 rounded-r-lg shadow-sm border-2 border-gray-300 border-l-0 group-focus-within:border-blue-700 group-focus-within:ring-blue-100"></i>
             </div>
@@ -112,14 +155,18 @@ export default function Logregis() {
                 type="password"
                 placeholder="Enter Title..."
                 className="w-[90%] bg-white border-2 border-gray-300 rounded-l-lg text-base border-r-0 px-4 py-2 shadow-sm focus:outline-none focus:border-blue-700 focus:border-r-0  focus:ring-blue-100"
-                name="pass"
+                name="lpass"
+                value={logindata.lpass}
+                onChange={onchangeLogin}
                 ref={passin}
+                required
+                autoComplete="current-password" 
               />
               <i className="fa-solid fa-eye-slash cursor-pointer text-blue-700 self-center bg-white p-3 rounded-r-lg shadow-sm border-2 border-gray-300 border-l-0 group-focus-within:border-blue-700 group-focus-within:ring-blue-100" ref={passi} onClick={passtogle}></i>
             </div>
 
 
-            <button className="bg-blue-700 text-base my-10 p-2 w-52 self-center text-white rounded-lg">
+            <button className="bg-blue-700 text-base my-10 p-2 w-52 self-center text-white rounded-lg" onClick={loginuser}>
               Login
             </button>
 
@@ -143,7 +190,10 @@ export default function Logregis() {
                 type="text"
                 placeholder="Enter Title..."
                 className="w-[90%] bg-white border-2  border-gray-300 rounded-l-lg text-base border-r-0 px-4 py-2 shadow-sm focus:outline-none focus:border-r-0 focus:border-blue-700  focus:border-2 focus:ring-blue-100"
-                name="email"
+                name="rname"
+                value={regisdata.rname}
+                required
+                onChange={onchangeRegis}
               />
               <i className="fa-solid fa-user self-center text-blue-700 bg-white p-3 rounded-r-lg shadow-sm border-2 border-gray-300 border-l-0 group-focus-within:border-blue-700 group-focus-within:ring-blue-100"></i>
             </div>
@@ -155,7 +205,11 @@ export default function Logregis() {
                 type="text"
                 placeholder="Enter Title..."
                 className="w-[90%] bg-white border-2  border-gray-300 rounded-l-lg text-base border-r-0 px-4 py-2 shadow-sm focus:outline-none focus:border-r-0 focus:border-blue-700  focus:border-2 focus:ring-blue-100"
-                name="email"
+                name="remail"
+                value={regisdata.remail}
+                required
+                onChange={onchangeRegis}
+                autoComplete="new-email" 
               />
               <i className="fa-solid fa-user self-center text-blue-700 bg-white p-3 rounded-r-lg shadow-sm border-2 border-gray-300 border-l-0 group-focus-within:border-blue-700 group-focus-within:ring-blue-100"></i>
             </div>
@@ -168,14 +222,18 @@ export default function Logregis() {
                 type="password"
                 placeholder="Enter Title..."
                 className="w-[90%] bg-white border-2 border-gray-300 rounded-l-lg text-base border-r-0 px-4 py-2 shadow-sm focus:outline-none focus:border-r-0 focus:border-blue-700   focus:ring-blue-100"
-                name="pass"
-                ref={passin}
+                name="rpass"
+                value={regisdata.rpass}
+                onChange={onchangeRegis}
+                ref={passinr}
+                required
+                autoComplete="new-password"
               />
-              <i className="fa-solid fa-eye-slash cursor-pointer text-blue-700 self-center bg-white p-3 rounded-r-lg shadow-sm border-2 border-gray-300 border-l-0 group-focus-within:border-blue-700 group-focus-within:ring-blue-100" ref={passi} onClick={passtogle}></i>
+              <i className="fa-solid fa-eye-slash cursor-pointer text-blue-700 self-center bg-white p-3 rounded-r-lg shadow-sm border-2 border-gray-300 border-l-0 group-focus-within:border-blue-700 group-focus-within:ring-blue-100" ref={passir} onClick={passtogle}></i>
             </div>
 
 
-            <button className="bg-blue-700 text-base my-5 p-2 w-52 self-center text-white rounded-lg">
+            <button className="bg-blue-700 text-base my-5 p-2 w-52 self-center text-white rounded-lg"  onClick={regisuser}>
               Register
             </button>
 

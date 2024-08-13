@@ -12,7 +12,9 @@ const NoteState = (props)=>{
 
     const [alert,setAlert] = useState({
         alerttype:null,
-        time:new Date().getTime()
+        time:new Date().getTime(),
+        color:"",
+        transform:""
     })
 
     const [modal,setModal] = useState({hidden:true,id:"",data:{}})
@@ -23,18 +25,25 @@ const NoteState = (props)=>{
 
     const [notes, setNotes] = useState(initialNotes);
 
+    const [udata,setUData] = useState({success:false,authtoken:""})
+
     const getNote = async ()=>{
 
-        const response = await fetch(`${host}/api/notes/getall`, {
-            method:'GET',
-            headers: {
-                "Content-Type": "application/json",
-                "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjZiNTE3NWUzNjNjNjEyNzU4NmRjOWY2In0sImlhdCI6MTcyMzM3NzA4MX0.RB1ZR7lgN8Nwp-xmQ0LJhgqfePIEzb-HeeByurtdbo0"
-            }
-        });
-        const json = await response.json() 
-        // console.log(json)
-        setNotes(json)
+        console.log(udata.success)
+
+        if(udata.success)
+        {
+            const response = await fetch(`${host}/api/notes/getall`, {
+                method:'GET',
+                headers: {
+                    "Content-Type": "application/json",
+                    "auth-token": udata.authtoken
+                }
+            });
+            const json = await response.json() 
+            // console.log(json)
+            setNotes(json)
+        }
 
     }
 
@@ -44,11 +53,11 @@ const NoteState = (props)=>{
             method:'GET',
             headers: {
                 "Content-Type": "application/json",
-                "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjZiNTE3NWUzNjNjNjEyNzU4NmRjOWY2In0sImlhdCI6MTcyMzM3NzA4MX0.RB1ZR7lgN8Nwp-xmQ0LJhgqfePIEzb-HeeByurtdbo0"
+                "auth-token": udata.authtoken
             }
         });
         const json = await response.json() 
-        if(wmodal=="edit")
+        if(wmodal==="edit")
         {
             setEModal({ hidden: false, data: json });
         }   
@@ -56,24 +65,31 @@ const NoteState = (props)=>{
             setModal({ hidden: false, id: id, data: json });
         }
         // console.log(json)
+    
+        
 
+       
     }
 
     const addNote= async (title,desc,tag)=>{
-
+       
         const response = await fetch(`${host}/api/notes/createnote`, {
             method:'POST',
             headers: {
                 "Content-Type": "application/json",
-                "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjZiNTE3NWUzNjNjNjEyNzU4NmRjOWY2In0sImlhdCI6MTcyMzM3NzA4MX0.RB1ZR7lgN8Nwp-xmQ0LJhgqfePIEzb-HeeByurtdbo0"
+                "auth-token": udata.authtoken
             },
             body:JSON.stringify({title,desc,tag})
         });
         const json = await response.json()
-        console.log(json)
+        // console.log(json)
 
-      
+        
         setNotes([...notes, json]);
+
+        updateAlert("Note Added Successfully!","blue","0px")
+    
+      
     }
 
     const editNote= async (id,title,desc,tag)=>{
@@ -82,32 +98,110 @@ const NoteState = (props)=>{
             method:'PUT',
             headers: {
                 "Content-Type": "application/json",
-                "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjZiNTE3NWUzNjNjNjEyNzU4NmRjOWY2In0sImlhdCI6MTcyMzM3NzA4MX0.RB1ZR7lgN8Nwp-xmQ0LJhgqfePIEzb-HeeByurtdbo0"
+                "auth-token": udata.authtoken
             },
             body:JSON.stringify({title,desc,tag})
         });
         const json = await response.json()
-        console.log(json)
+        // console.log(json)
 
         getNote()
+        updateAlert("Note Updated Successfully!","blue","0px")
 
-        // setNotes([...notes, json]);
+            // setNotes([...notes, json]);
+    
+
+        
     }
 
     const deleteNote = async (id)=>{
+
         const response = await fetch(`${host}/api/notes/deletenote/${id}`, {
             method:'DELETE',
             headers: {
                 "Content-Type": "application/json",
-                "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjZiNTE3NWUzNjNjNjEyNzU4NmRjOWY2In0sImlhdCI6MTcyMzM3NzA4MX0.RB1ZR7lgN8Nwp-xmQ0LJhgqfePIEzb-HeeByurtdbo0"
+                "auth-token": udata.authtoken
             }
         });
         const json = await response.json() 
-        console.log(json)
+        // console.log(json)
         setNotes(json)
+
+        updateAlert("Note Deleted Successfully!","blue","0px")
     }
 
 
+    const userlogin = async (email,pass)=>{
+        const response = await fetch(`${host}/api/auth/login`, {
+            method:'POST',
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body:JSON.stringify({email,pass})
+        });
+        const json = await response.json()
+        if(json.success)
+        {
+            setUData({success:json.success,authtoken:json.authtoken})
+            updateAlert("Login Successfully","blue","-63px")
+            console.log(json)
+        }
+        else{
+            setUData({success:false,authtoken:null})
+            updateAlert(json.error,"red","-63px")
+        }
+    }
+
+    // const getuser = async ()=>{
+    //     const response = await fetch(`${host}/api/auth/getuser`, {
+    //         method:'POST',
+    //         headers: {
+    //             "Content-Type": "application/json",
+    //             "auth-token": udata.authtoken
+
+    //         }
+    //     });
+    //     const json = await response.json()
+    //     if(json.success)
+    //     {
+    //         setUData({success:json.success,authtoken:json.authtoken})
+    //         updateAlert("Login Successfully","blue","-63px")
+    //         console.log(json)
+    //     }
+    //     else{
+    //         setUData({success:false,authtoken:null})
+    //         updateAlert(json.error,"red","-63px")
+    //     }
+    // }
+
+    const userregis = async (name,email,pass)=>{
+        const response = await fetch(`${host}/api/auth/createuser`, {
+            method:'POST',
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body:JSON.stringify({name,email,pass})
+        });
+        const json = await response.json() 
+        console.log(json)
+        if(json.success)
+        {
+            setUData({success:json.success,authtoken:json.authtoken})
+            updateAlert("Registered Successfully","blue","-63px")
+        }
+        else{
+            setUData({success:false,authtoken:null})
+            updateAlert(json.error,"red","-63px")
+        }
+    }
+
+
+    const updateData = ()=>{
+        setUData({
+            success:false,
+            authtoken:""
+        })
+    }
 
     const updatestate = (click1)=>{
         setState({
@@ -131,15 +225,18 @@ const NoteState = (props)=>{
         })
     }
 
-    const updateAlert=(alert)=>{
+    const updateAlert=(alert,color1,t)=>{
         setAlert({
             alerttype:alert,
-            time:new Date().getTime()
+            time:new Date().getTime(),
+            color:color1,
+            transform:t
+
         })
     }
 
     return(
-        <NoteContext.Provider value={{s1,updatestate,notes,addNote,deleteNote,getNote,editNote,modal,hideModal,getOneNote,hideEModal,emodal,updateAlert,alert}}>
+        <NoteContext.Provider value={{s1,updatestate,notes,addNote,deleteNote,getNote,editNote,modal,hideModal,getOneNote,hideEModal,emodal,updateAlert,alert,userlogin,userregis,udata,updateData}}>
             {props.children}
         </NoteContext.Provider>
     )

@@ -13,9 +13,10 @@ export default function Alert() {
 
         if(text!==null)
         {
-            reff.current.style.transform="translateY(0px)"
+        
+            reff.current.style.transform=`translateY(${context.alert.transform})` 
             setTimeout(()=>{
-            reff.current.style.transform="translateY(-70px)"
+            reff.current.style.transform="translateY(-130px)"
             },2000)
         }
 
@@ -26,7 +27,7 @@ export default function Alert() {
   return (
    
     
-    <div className='w-full pb-5 pt-20 px-4  bg-blue-300 transition-all duration-500 fixed -translate-y-20  '  ref={reff}>
+    <div className={`w-full pb-5 pt-20 px-4 ${context.alert.color==="blue"?"bg-blue-300":"bg-red-300"} transition-all duration-500 fixed -translate-y-40 z-10  `}  ref={reff}>
         <h1 className='text-base font-semibold'>{text}</h1>
       
     </div>

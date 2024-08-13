@@ -14,7 +14,6 @@ export default function AddNote() {
         if (note.title && note.desc && note.tag) {
             context.addNote(note.title, note.desc, note.tag);
             console.log("Note Added");
-            context.updateAlert("Note Added Successfully!")
             setNote({ title: "", desc: "", tag: "" });
         } else {
             console.log("Please fill all fields.");

@@ -12,7 +12,7 @@ export default function EditModal(props) {
     if (!context.emodal.hidden) {
       div.current.style.display = "flex";
       setNote({ title: title || "", desc: desc || "", tag: tag || "" });
-      console.log(context.emodal.hidden);
+      // console.log(context.emodal.hidden);
     } else {
       div.current.style.display = "none";
     }
@@ -24,7 +24,6 @@ export default function EditModal(props) {
         console.log("Note Updated",_id); 
       context.editNote(_id, note.title, note.desc, note.tag);
       context.hideEModal(true, {});
-    context.updateAlert("Note Updated Successfully!")
     //   setNote({ title: "", desc: "", tag: "" });
     } else {
       console.log("Please fill all fields.");
@@ -46,7 +45,7 @@ export default function EditModal(props) {
       className="fixed inset-0 bg-gray-600 bg-opacity-30 flex justify-center items-center z-30"
       ref={div}
     >
-      <div className="bg-white rounded-lg shadow-lg max-w-lg w-full mx-5 md:mx-0">
+      <div className="bg-white rounded-lg shadow-lg max-w-lg w-full mx-10 md:mx-0">
         <div className="border-b px-4 py-2 flex justify-between items-center">
           <h3 className="text-xl font-semibold">Edit Note</h3>
           <button onClick={handleClose} className="text-gray-900">

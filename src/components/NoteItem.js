@@ -6,7 +6,6 @@ export default function NoteItem(props) {
 
   const handleDelete = () => {
     context.deleteNote(props.id);
-    context.updateAlert("Note Deleted Successfully!")
     console.log("Note Deleted");
   };
 
