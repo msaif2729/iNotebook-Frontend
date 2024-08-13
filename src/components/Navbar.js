@@ -1,9 +1,6 @@
-import React, { useContext,  useRef } from "react";
+import React, { useContext, useRef } from "react";
 import noteContext from "../context/notes/noteContext";
-import {
-    useLocation,
-    Link
-  } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 
 export default function Navbar() {
   const context = useContext(noteContext);
@@ -13,7 +10,7 @@ export default function Navbar() {
   const div3 = useRef(null);
   const option = useRef(null);
 
-  const location = useLocation()
+  const location = useLocation();
   // console.log(location)
 
   const handleclick = () => {
@@ -32,33 +29,83 @@ export default function Navbar() {
     }
   };
 
-  const logout = ()=>{
-    context.updateData()
-  }
+  const logout = () => {
+    context.updateData();
+  };
 
   return (
     <div>
-      <nav className={` bg-gray-100 px-3 py-4 w-full flex justify-between transition-all duration-100 z-20 fixed ${location.pathname==="/login"?"hidden":"block"} `}>
+      <nav
+        className={` bg-gray-100 px-3 py-4 w-full flex justify-between transition-all duration-100 z-20 fixed ${
+          location.pathname === "/login" ? "hidden" : "block"
+        } `}
+      >
         <Link to="/" className=" tracking-wide text-xl cursor-pointer">
           <b>i</b>
           <span className=" font-extrabold text-blue-700">NoteBook</span>
-        </Link >
+        </Link>
         <ul className="flex justify-between font-sans space-x-5 ">
           <li className="relative md:static">
             <div className="hidden md:flex">
               <ul className="space-x-5 flex">
                 <li className=" tracking-wide cursor-pointer self-center">
-                  <Link to="/"  className={location.pathname === "/"? "text-blue-700 font-semibold": "text-gray-800"}>Home</Link >
-                </li>
-                <li className=" tracking-wide cursor-pointer self-center " >
-                  <Link to="/about" className={location.pathname === "/about"? "text-blue-700 font-semibold": "text-gray-800"}>About</Link >
-                </li>
-                <li className={`${context.udata.success?"block":"hidden"} tracking-wide cursor-pointer self-center `}>
-                  <Link to="/addnote" className={location.pathname === "/addnote"? "text-blue-700 font-semibold": "text-gray-800"}>Add Note</Link >
+                  <Link
+                    to="/"
+                    className={
+                      location.pathname === "/"
+                        ? "text-blue-700 font-semibold"
+                        : "text-gray-800"
+                    }
+                  >
+                    Home
+                  </Link>
                 </li>
                 <li className=" tracking-wide cursor-pointer self-center ">
-                  <Link to="/login" className={`${context.udata.success?"hidden":"block"} text-blue-700 font-bold border  py-1 px-3 rounded-lg border-blue-700  `}>Login</Link >
-                  <Link to="/" className={`${context.udata.success?"block":"hidden"} text-blue-700 font-bold border  py-1 px-3 rounded-lg border-blue-700  `} onClick={logout}>Logout</Link >
+                  <Link
+                    to="/about"
+                    className={
+                      location.pathname === "/about"
+                        ? "text-blue-700 font-semibold"
+                        : "text-gray-800"
+                    }
+                  >
+                    About
+                  </Link>
+                </li>
+                <li
+                  className={`${
+                    context.udata.success ? "block" : "hidden"
+                  } tracking-wide cursor-pointer self-center `}
+                >
+                  <Link
+                    to="/addnote"
+                    className={
+                      location.pathname === "/addnote"
+                        ? "text-blue-700 font-semibold"
+                        : "text-gray-800"
+                    }
+                  >
+                    Add Note
+                  </Link>
+                </li>
+                <li className=" tracking-wide cursor-pointer self-center ">
+                  <Link
+                    to="/login"
+                    className={`${
+                      context.udata.success ? "hidden" : "block"
+                    } text-blue-700 font-bold border  py-1 px-3 rounded-lg border-blue-700  `}
+                  >
+                    Login
+                  </Link>
+                  <Link
+                    to="/"
+                    className={`${
+                      context.udata.success ? "block" : "hidden"
+                    } text-blue-700 font-bold border  py-1 px-3 rounded-lg border-blue-700  `}
+                    onClick={logout}
+                  >
+                    Logout
+                  </Link>
                 </li>
                 {/* <li className="flex cursor-pointer self-center">
                   <div className="flex justify-center items-center space-x-1">
@@ -96,22 +143,71 @@ export default function Navbar() {
           </li>
         </ul>
       </nav>
-      <div className="bg-gray-200 px-5 py-2 fixed w-full mt-[60px] hidden md:hidden transition-all duration-100" ref={option}>
+      <div
+        className="bg-gray-200 px-5 py-2 fixed w-full mt-[60px] hidden md:hidden transition-all duration-100"
+        ref={option}
+      >
         <ul className="space-y-2 ">
-        <li className=" tracking-wide cursor-pointer self-center">
-          <Link to="/"  className={location.pathname === "/"? "text-blue-700 font-semibold": "text-gray-800"}>Home</Link >
-        </li>
-        <li className=" tracking-wide cursor-pointer self-center ">
-          <Link to="/about"  className={location.pathname === "/about"? "text-blue-700 font-semibold": "text-gray-800"}>About</Link >
-        </li>
-        <li className=" tracking-wide cursor-pointer self-center ">
-            <Link to="/addnote" className={location.pathname === "/addnote"? "text-blue-700 font-semibold": "text-gray-800"}>Add Note</Link >
-        </li>
-        <li className=" tracking-wide cursor-pointer self-center py-2">
-            <Link to="/login" className="text-blue-800 font-bold border-2 py-1 px-3 rounded-lg border-blue-700">Login</Link >
+          <li className=" tracking-wide cursor-pointer self-center">
+            <Link
+              to="/"
+              className={
+                location.pathname === "/"
+                  ? "text-blue-700 font-semibold"
+                  : "text-gray-800"
+              }
+            >
+              Home
+            </Link>
+          </li>
+          <li className=" tracking-wide cursor-pointer self-center ">
+            <Link
+              to="/about"
+              className={
+                location.pathname === "/about"
+                  ? "text-blue-700 font-semibold"
+                  : "text-gray-800"
+              }
+            >
+              About
+            </Link>
+          </li>
+          <li
+            className={`${
+              context.udata.success ? "block" : "hidden"
+            } tracking-wide cursor-pointer self-center `}
+          >
+            <Link
+              to="/addnote"
+              className={
+                location.pathname === "/addnote"
+                  ? "text-blue-700 font-semibold"
+                  : "text-gray-800"
+              }
+            >
+              Add Note
+            </Link>
+          </li>
+          <li className=" tracking-wide cursor-pointer self-center py-2">
+          <Link
+                    to="/login"
+                    className={`${
+                      context.udata.success ? "hidden" : ""
+                    } text-blue-800 font-bold border  py-1 px-3 rounded-lg border-blue-700  `}
+                  >
+                    Login
+                  </Link>
+                  <Link
+                    to="/"
+                    className={`${
+                      context.udata.success ? "" : "hidden"
+                    } text-blue-800 font-bold border  py-1 px-3 rounded-lg border-blue-700  `}
+                    onClick={logout}
+                  >
+                    Logout
+                  </Link>
         </li>
         </ul>
-        
       </div>
     </div>
   );
