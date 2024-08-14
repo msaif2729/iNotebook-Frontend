@@ -1,6 +1,7 @@
 import React, { useContext, useRef } from "react";
 import noteContext from "../context/notes/noteContext";
 import { useLocation, Link } from "react-router-dom";
+import AccountModal from "./AccountModal";
 
 export default function Navbar() {
   const context = useContext(noteContext);
@@ -9,6 +10,7 @@ export default function Navbar() {
   const div2 = useRef(null);
   const div3 = useRef(null);
   const option = useRef(null);
+
 
   const location = useLocation();
   // console.log(location)
@@ -30,7 +32,8 @@ export default function Navbar() {
   };
 
   const logout = () => {
-    context.updateData();
+    context.hideAModal(false)
+    console.log(context.amodal.hidden)
   };
 
   return (
@@ -74,7 +77,7 @@ export default function Navbar() {
                 </li>
                 <li
                   className={`${
-                    context.udata.success ? "block" : "hidden"
+                    localStorage.getItem("token") ? "block" : "hidden"
                   } tracking-wide cursor-pointer self-center `}
                 >
                   <Link
@@ -92,7 +95,7 @@ export default function Navbar() {
                   <Link
                     to="/login"
                     className={`${
-                      context.udata.success ? "hidden" : "block"
+                      localStorage.getItem("token") ? "hidden" : "block"
                     } text-blue-700 font-bold border  py-1 px-3 rounded-lg border-blue-700  `}
                   >
                     Login
@@ -100,11 +103,11 @@ export default function Navbar() {
                   <Link
                     to="/"
                     className={`${
-                      context.udata.success ? "block" : "hidden"
-                    } text-blue-700 font-bold border  py-1 px-3 rounded-lg border-blue-700  `}
+                      localStorage.getItem("token") ? "block" : "hidden"
+                    } text-blue-700 font-bold  py-1  `}
                     onClick={logout}
                   >
-                    Logout
+                    Account
                   </Link>
                 </li>
                 {/* <li className="flex cursor-pointer self-center">
@@ -174,7 +177,7 @@ export default function Navbar() {
           </li>
           <li
             className={`${
-              context.udata.success ? "block" : "hidden"
+              localStorage.getItem("token") ? "block" : "hidden"
             } tracking-wide cursor-pointer self-center `}
           >
             <Link
@@ -192,7 +195,7 @@ export default function Navbar() {
           <Link
                     to="/login"
                     className={`${
-                      context.udata.success ? "hidden" : ""
+                      localStorage.getItem("token") ? "hidden" : ""
                     } text-blue-800 font-bold border  py-1 px-3 rounded-lg border-blue-700  `}
                   >
                     Login
@@ -200,15 +203,17 @@ export default function Navbar() {
                   <Link
                     to="/"
                     className={`${
-                      context.udata.success ? "" : "hidden"
-                    } text-blue-800 font-bold border  py-1 px-3 rounded-lg border-blue-700  `}
+                      localStorage.getItem("token") ? "" : "hidden"
+                    } text-blue-800 font-bold border  py-1 px-3  `}
                     onClick={logout}
                   >
-                    Logout
+                    Account
                   </Link>
         </li>
         </ul>
       </div>
+
+      <AccountModal/>
     </div>
   );
 }

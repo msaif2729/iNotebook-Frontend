@@ -12,7 +12,12 @@ export default function Note() {
     // console.log(notes)
 
     useEffect(()=>{
-        getNote()
+        const token = localStorage.getItem("token");
+        console.log("Token retrieved:", token);
+        if (token  && token !== "null") {
+            getNote();
+            console.log(token);
+        }
     },[])
 
 
@@ -21,21 +26,21 @@ export default function Note() {
     <div className=' pb-2 py-5 pt-20 '>
         <div className=" justify-between flex px-3 md:px-20 ">
             <h1 className='text-2xl font-bold '>Your Notes</h1>
-            <div className={`flex justify-center items-center ${context.udata.success?"block":"hidden"}`}>
+            <div className={`flex justify-center items-center ${localStorage.getItem("token")?"block":"hidden"}`}>
                 <Link to="/addnote" className="flex justify-center items-center">
                     <i className="fa-solid fa-circle-plus self-center mr-1 text-blue-700"></i>
                     <p className='font-semibold text-base text-blue-700' >Add New Note</p>
                 </Link>
             </div>
         </div>
-        <div className={`${context.udata.success?"hidden":"block"} flex flex-col justify-center items-center pt-3 transition-all duration-100`}> 
+        <div className={`${localStorage.getItem("token")?"hidden":"block"} flex flex-col justify-center items-center pt-3 transition-all duration-100`}> 
 
             <img src={nodata} className='w-60' alt="" />
             <h1>To create a note plz <strong className='text-blue-700 cursor-pointer'><u> <Link to="/login">Sign-in</Link></u></strong></h1>
 
         </div>
-        <div className={`${context.udata.success?"block":"hidden"} flex flex-wrap justify-center items-center pt-3 transition-all duration-100`}>
-            {notes.length==0 && <h1 className='font-bold '>No Notes to display</h1>}
+        <div className={`${localStorage.getItem("token")?"block":"hidden"} flex flex-wrap justify-center items-center pt-3 transition-all duration-100`}>
+            {notes.length===0 && <h1 className='font-bold '>No Notes to display</h1>}
             {notes.map((note)=>{
                 // console.log(note)
                 return  <div  key={note._id}>

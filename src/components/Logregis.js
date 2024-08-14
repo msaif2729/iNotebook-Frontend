@@ -82,6 +82,8 @@ export default function Logregis() {
       e.preventDefault()
       // console.log(logindata)
       context.userlogin(logindata.lemail,logindata.lpass)
+
+      setLData({lemail:"",lpass:""})
     
 
      }
@@ -93,6 +95,7 @@ export default function Logregis() {
       e.preventDefault()
       console.log(regisdata)
       context.userregis(regisdata.rname,regisdata.remail,regisdata.rpass)
+      setRData({rname:"",remail:"",rpass:""})
 
      }
 
@@ -127,6 +130,7 @@ export default function Logregis() {
         <div className="bg-gray-200 inset-0 absolute rounded-xl shadow-2xl transition-all duration-500  " ref={login}>
           <form
             action=""
+            onSubmit={loginuser}
             className="flex flex-col h-full px-5 py-5 justify-center "
           >
             <h1 className="font-bold text-3xl self-center pt-4 pb-5  ">Login</h1>
@@ -166,7 +170,7 @@ export default function Logregis() {
             </div>
 
 
-            <button className="bg-blue-700 text-base my-10 p-2 w-52 self-center text-white rounded-lg" onClick={loginuser}>
+            <button className="bg-blue-700 text-base my-10 p-2 w-52 self-center text-white rounded-lg" type="submit">
               Login
             </button>
 
@@ -180,6 +184,7 @@ export default function Logregis() {
             action=""
             className="flex flex-col h-full px-5 py-5 justify-center "
             ref={form}
+            onSubmit={regisuser}
           >
             <h1 className="font-bold text-3xl self-center pt-4 pb-3  ">Register</h1>
             <span className=" font-bold text-sm md:text-base rounded-l-lg pb-1 px-2">
@@ -233,7 +238,7 @@ export default function Logregis() {
             </div>
 
 
-            <button className="bg-blue-700 text-base my-5 p-2 w-52 self-center text-white rounded-lg"  onClick={regisuser}>
+            <button className="bg-blue-700 text-base my-5 p-2 w-52 self-center text-white rounded-lg"  type="submit">
               Register
             </button>
 
