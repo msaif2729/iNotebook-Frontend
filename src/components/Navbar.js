@@ -204,7 +204,7 @@ export default function Navbar() {
                     to="/"
                     className={`${
                       localStorage.getItem("token") ? "" : "hidden"
-                    } text-blue-800 font-bold border  py-1 px-3  `}
+                    } text-blue-800 font-bold border  py-1  `}
                     onClick={logout}
                   >
                     Account
