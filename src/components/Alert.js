@@ -6,6 +6,7 @@ export default function Alert() {
     const context = useContext(noteContext);
 
     var text = context.alert.alerttype;
+    console.log(text)
     
     const reff = useRef(null);
 
