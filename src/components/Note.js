@@ -3,6 +3,7 @@ import NoteItem from './NoteItem'
 import { Link } from 'react-router-dom'
 import noteContext from '../context/notes/noteContext'
 import nodata from "./nodata.png"
+import notestaking from './notestaking.png'
 
 export default function Note() {
 
@@ -18,13 +19,23 @@ export default function Note() {
             getNote();
             console.log(token);
         }
+        // eslint-disable-next-line
     },[])
 
 
 
   return (
-    <div className=' pb-2 py-5 pt-20 '>
-        <div className=" justify-between flex px-3 md:px-20 ">
+    <div className=' pb-2 py-5 pt-14 '>
+        <div className=" justify-evenly flex flex-col px-3 md:px-20 lg:flex-row pb-5 items-center pt-5 bg-blue-200">
+            <div className='self-center w-[100%] flex flex-col justify-center items-center lg:items-start '>
+                <h1 className='font-normal text-6xl  '>Welcome to<br></br> <strong>i<span className='text-blue-700 text-7xl'>Notebook</span></strong></h1>
+                <p className='text-2xl mt-3 text-center lg:text-start'> Your personal notebook in the cloud.<br></br> Securely access and manage your notes from anywhere, anytime.</p>
+            </div>
+            <div className='self-center w-[100%] flex flex-col justify-center items-center lg:items-end '>
+                <img src={notestaking} alt="" className='w-96 ' />
+            </div>
+        </div>
+        <div className=" justify-between flex px-3 pt-5 md:px-20 ">
             <h1 className='text-2xl font-bold '>Your Notes</h1>
             <div className={`flex justify-center items-center ${localStorage.getItem("token")?"block":"hidden"}`}>
                 <Link to="/addnote" className="flex justify-center items-center">

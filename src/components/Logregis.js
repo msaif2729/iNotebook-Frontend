@@ -50,16 +50,16 @@ export default function Logregis() {
 
     const handleRegis = ()=>{
 
-       console.log("clicked")
-       login.current.style.transform="rotateY(180deg)"
-        regis.current.style.transform="rotateY(180deg)"
-         regis.current.style.zIndex="10"
+      // console.log("clicked")
+      login.current.style.transform="rotateY(180deg)"
+      regis.current.style.transform="rotateY(180deg)"
+      regis.current.style.zIndex="10"
     
     }
 
     const handleLogin = ()=>{
 
-        console.log("clicked")
+        // console.log("clicked")
         login.current.style.transform="rotateY(0deg)"
          regis.current.style.transform="rotateY(0deg)"
           regis.current.style.zIndex="-10"
@@ -77,25 +77,36 @@ export default function Logregis() {
 
      const [logindata,setLData] = useState({lemail:"",lpass:""})
     
-     const loginuser = (e)=>{
+     const loginuser = async (e)=>{
 
       e.preventDefault()
       // console.log(logindata)
-      context.userlogin(logindata.lemail,logindata.lpass)
+      await context.userlogin(logindata.lemail,logindata.lpass)
 
       setLData({lemail:"",lpass:""})
+      if(localStorage.getItem("token"))
+      {
+        navigate("/")
+      }
+
+      
     
 
      }
 
      const [regisdata,setRData] = useState({rname:"",remail:"",rpass:""})
      
-     const regisuser = (e)=>{
+     const regisuser =async (e)=>{
 
       e.preventDefault()
       console.log(regisdata)
-      context.userregis(regisdata.rname,regisdata.remail,regisdata.rpass)
+      await context.userregis(regisdata.rname,regisdata.remail,regisdata.rpass)
       setRData({rname:"",remail:"",rpass:""})
+
+      if(localStorage.getItem("token"))
+        {
+          navigate("/")
+        }
 
      }
 

@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react'
 import noteContext from '../context/notes/noteContext'
+import { useNavigate } from "react-router-dom";
 
 export default function AddNote() {
 
@@ -7,14 +8,17 @@ export default function AddNote() {
 
     const context = useContext(noteContext)
 
+    const navigate = useNavigate()
+
 
 
     const handleClick = (e) => {
         e.preventDefault();
         if (note.title && note.desc && note.tag) {
             context.addNote(note.title, note.desc, note.tag);
-            console.log("Note Added");
             setNote({ title: "", desc: "", tag: "" });
+            
+            navigate("/")
         } else {
             console.log("Please fill all fields.");
         }
@@ -24,6 +28,7 @@ export default function AddNote() {
 
         setNote({...note,[e.target.name]:e.target.value})
         // console.log(note)
+        
 
     }
 

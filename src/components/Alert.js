@@ -6,7 +6,7 @@ export default function Alert() {
     const context = useContext(noteContext);
 
     var text = context.alert.alerttype;
-    console.log(text)
+    // console.log(text)
     
     const reff = useRef(null);
 
@@ -17,10 +17,10 @@ export default function Alert() {
         
             reff.current.style.transform=`translateY(${context.alert.transform})` 
             setTimeout(()=>{
-            reff.current.style.transform="translateY(-130px)"
+            reff.current.style.transform="translateY(-230px)"
             },2000)
         }
-
+          // eslint-disable-next-line
     },[context.alert.time])
     
     

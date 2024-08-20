@@ -144,7 +144,7 @@ const NoteState = (props)=>{
         if(json.success)
         {
             setUData({success:json.success,authtoken:json.authtoken})
-            updateAlert("Login Successfully","blue","-63px")
+            updateAlert("Login Successfully","blue","0px")
             console.log(json)
             localStorage.setItem('token', json.authtoken);
         }
@@ -182,7 +182,7 @@ const NoteState = (props)=>{
         if(json.success)
         {
             setUData({success:json.success,authtoken:json.authtoken})
-            updateAlert("Registered Successfully","blue","-63px")
+            updateAlert("Registered Successfully","blue","0px")
             localStorage.setItem('token', json.authtoken);
         }
         else{
@@ -234,7 +234,6 @@ const NoteState = (props)=>{
             time:new Date().getTime(),
             color:color1,
             transform:t
-
         })
     }
 
