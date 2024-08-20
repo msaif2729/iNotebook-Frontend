@@ -28,7 +28,7 @@ export default function Note() {
     <div className=' pb-2 py-5 pt-14 '>
         <div className=" justify-evenly flex flex-col px-3 md:px-20 lg:flex-row pb-5 items-center pt-5 bg-blue-200">
             <div className='self-center w-[100%] flex flex-col justify-center items-center lg:items-start '>
-                <h1 className='font-normal text-4xl lg:text-6xl text-center md:text-start '>Welcome to<br></br> <strong>i<span className='text-blue-700 text-5xl lg:text-7xl'>Notebook</span></strong></h1>
+                <h1 className='font-semibold text-4xl lg:text-6xl text-center md:text-start '>Welcome to<br></br> <strong>i<span className='text-blue-700 text-5xl lg:text-7xl'>Notebook</span></strong></h1>
                 <p className='text-2xl mt-3 text-center lg:text-start'> Your personal notebook in the cloud.<br></br> Securely access and manage your notes from anywhere, anytime.</p>
             </div>
             <div className='self-center w-[100%] flex flex-col justify-center items-center lg:items-end '>
