@@ -150,7 +150,7 @@ const NoteState = (props)=>{
         }
         else{
             setUData({success:false,authtoken:null})
-            updateAlert(json.error,"red","-63px")
+            updateAlert(json.error,"red","-96px")
             
         }
     }
@@ -187,7 +187,7 @@ const NoteState = (props)=>{
         }
         else{
             setUData({success:false,authtoken:null})
-            updateAlert(json.error[0].msg||json.error,"red","-63px")
+            updateAlert(json.error[0].msg||json.error,"red","-96px")
         }
     }
 
