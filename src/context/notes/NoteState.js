@@ -4,7 +4,7 @@ import NoteContext from "./noteContext";
 const NoteState = (props)=>{
 
 
-    const host = "https://inotebook-backend-cyan.vercel.app";
+    const host = "https://inotebook-saif.vercel.app/";
 
     const [s1, setState] = useState({
         click : true,
