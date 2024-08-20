@@ -107,7 +107,7 @@ export default function About() {
   <div className=" justify-evenly flex flex-col  md:px-20 lg:flex-row pb-5 items-center px-5 bg-b">
         <div className="self-center w-[100%] flex flex-col justify-center items-center lg:items-start ">
           <p className="text-4xl font-semibold mt-3 text-center  lg:text-start">
-           Our Mission
+            The Reason Behind iNotebook
           </p>
           <p className="mt-2 font-normal text-center lg:text-start ">
           iNotebook was born out of the need for a secure, efficient, and accessible note-taking solution that respects your privacy. We wanted to create a platform that simplifies the way you manage your thoughts and tasks, while offering the flexibility to access your notes anywhere, anytime. Our goal is to empower you with a tool that not only enhances your productivity but also adapts to your lifestyle, keeping your information safe and at your fingertips.  
