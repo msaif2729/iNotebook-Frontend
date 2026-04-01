@@ -4,7 +4,8 @@ import NoteContext from "./noteContext";
 const NoteState = (props)=>{
 
 
-    const host = "https://inotebook-backend-cyan.vercel.app";
+    const host = process.env.REACT_APP_BACKEND_URL || "http://localhost:5000";
+    
 
     const [s1, setState] = useState({
         click : true,
@@ -34,7 +35,7 @@ const NoteState = (props)=>{
 
     const getNote = async ()=>{
 
-        console.log(udata.success)
+        // console.log(udata.success)
             const response = await fetch(`${host}/api/notes/getall`, {
                 method:'GET',
                 headers: {

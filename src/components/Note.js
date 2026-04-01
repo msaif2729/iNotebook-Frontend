@@ -14,10 +14,10 @@ export default function Note() {
 
     useEffect(()=>{
         const token = localStorage.getItem("token");
-        console.log("Token retrieved:", token);
+        // console.log("Token retrieved:", token);
         if (token  && token !== "null") {
             getNote();
-            console.log(token);
+            // console.log(token);
         }
         // eslint-disable-next-line
     },[])
