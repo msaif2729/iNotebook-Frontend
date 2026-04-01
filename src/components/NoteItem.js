@@ -14,12 +14,12 @@ export default function NoteItem(props) {
     date.toDateString().slice(0, 3) + "," + date.toDateString().slice(3);
 
   const handleModal = async () => {
-    const response = await context.getOneNote(props.id,"view");
+    await context.getOneNote(props.id,"view");
     // console.log(context.modal.hidden + " " + props.id);
   };
 
   const handleEdit = async () => {
-    const response = await context.getOneNote(props.id,"edit");
+    await context.getOneNote(props.id,"edit");
   };
 
   return (
