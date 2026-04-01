@@ -8,13 +8,15 @@ export default function AccountModal() {
     const div = useRef(null)
     const context = useContext(noteContext)
 
-    useEffect(()=>{
-        div.current.style.display=context.amodal.hidden?"none":"flex"
-        if(localStorage.getItem("token"))
-        {
-            context.getuser()
+    const { amodal, getuser } = context;
+
+    useEffect(() => {
+        div.current.style.display = amodal.hidden ? "none" : "flex";
+
+        if (localStorage.getItem("token")) {
+            getuser();
         }
-    },[context.amodal.hidden])
+    }, [amodal.hidden, getuser]);
 
     const handleLogout = ()=>{
         context.updateData();
